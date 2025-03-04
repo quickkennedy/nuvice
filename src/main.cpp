@@ -52,32 +52,12 @@ int main( int argc, char *argv[] )
         std::cout << "no arguments provided. use --encrypt (or -e) to encrypt and --decrypt (-d) to decrypt. you can also just run nuvice with a file and it will assume decryption with no additional arguments." << std::endl;
         return 0;
     }
-    else if (argc == 2) {
-        if (std::filesystem::exists(argv[1])) {
-            // the first argument is a file, just decrypt the file
-        } else {
-
-            // the first argument isnt a file, so lets see if they were trying to use one of the arguments.
-            if (argv[1] == std::string("-d") || argv[1] == std::string("-e") || argv[1] == std::string("--decrypt") || argv[1] == std::string("--encrypt")) {
-
-                // they were using one of the arguments, but didnt provide any file (we only have 2 arguments, argc is 2)
-                // tell them this
-                std::cout << "error: no file provided after " << argv[1] << std::endl;
-
-                // return 1 for error
-                return 1;
-            }
-
-            std::cout << "error: cannot find file " << argv[1] << " or argument unknown" << std::endl;
-            return 1;
-        }
-    }
     else if (argc == 3) {
-        if (argv[1] == std::string("d") || argv[1] == std:string("e")) {
+        if (argv[1] == (char*)'d' || argv[1] == (char*)'e') {
 
             // check if the file we operate on exists
             if (std::filesystem::exists(argv[2])) {
-                if (argv[1] == std::string("-d") || argv[1] == std::string("--decrypt")) {
+                if (argv[1] == (char*)'d') {
                     // decrypt
                     decryptFile(argv[2]);
                     return 0;
